@@ -42,6 +42,11 @@ body {
   animation: pulse-ring 2s infinite;
 }
 
+@page {
+  size: letter;
+  margin: 0.5in;
+}
+
 @media print {
   header, nav, .no-print, iframe, button {
     display: none !important;
