@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useRef, useState, useCallback } from "react"
+import { useMemo } from "react"
 import { useStore } from "@/store"
 import { useStudent } from "@/components/student/student-provider"
 import { piruetaConfig } from "@/app/(items)/pirueta-patineta/config"
@@ -26,8 +26,6 @@ const DIFF_CONFIG: Record<Difficulty, { emoji: string; color: string; label: str
 }
 
 export default function ImprimirPage() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [downloading, setDownloading] = useState(false)
   const { studentName, studentNie } = useStudent()
   const answers = useStore((s) => s.answers)
 
@@ -65,30 +63,8 @@ export default function ImprimirPage() {
     return { counts, total }
   }, [itemStats])
 
-  const handleDownload = useCallback(async () => {
-    if (!ref.current) return
-    setDownloading(true)
-    try {
-      const html2pdf = (await import("html2pdf.js")).default
-      await html2pdf()
-        .set({
-          margin: 8,
-          filename: `cuadernillo_${studentName || "estudiante"}.pdf`,
-          image: { type: "jpeg" as const, quality: 0.95 },
-          html2canvas: { scale: 1, useCORS: true, logging: false },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        })
-        .from(ref.current)
-        .save()
-    } catch {
-      window.print()
-    }
-    setDownloading(false)
-  }, [studentName])
-
   return (
     <div className="space-y-8 py-3">
-      <div ref={ref} className="space-y-8">
       <div className="border-b-2 border-zinc-800 pb-4 text-center">
         <h1 className="text-base font-bold uppercase tracking-tight">
           Aprendamos a Estudiar, JULIO 2026
@@ -219,16 +195,17 @@ export default function ImprimirPage() {
           </section>
         )
       })}
-      </div>
 
       <div className="no-print flex flex-col gap-3 border-t border-zinc-200 pt-5">
         <button
-          onClick={handleDownload}
-          disabled={downloading}
-          className="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white active:bg-blue-700 disabled:opacity-60"
+          onClick={() => window.print()}
+          className="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white active:bg-blue-700"
         >
-          {downloading ? "Generando PDF..." : "Guardar PDF"}
+          Guardar PDF
         </button>
+        <p className="text-center text-[10px] text-zinc-400">
+          En Chrome: seleccioná "Guardar como PDF" y luego "Descargar".
+        </p>
         <button
           onClick={() => window.history.back()}
           className="w-full rounded-lg border border-zinc-300 bg-white px-5 py-3 text-sm font-semibold text-zinc-700 active:bg-zinc-50"
