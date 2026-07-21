@@ -68,18 +68,22 @@ export default function ImprimirPage() {
   const handleDownload = useCallback(async () => {
     if (!ref.current) return
     setDownloading(true)
-    const html2pdf = (await import("html2pdf.js")).default
-    html2pdf()
-      .set({
-        margin: 8,
-        filename: `cuadernillo_${studentName || "estudiante"}.pdf`,
-        image: { type: "jpeg" as const, quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      })
-      .from(ref.current)
-      .save()
-      .then(() => setDownloading(false))
+    try {
+      const html2pdf = (await import("html2pdf.js")).default
+      await html2pdf()
+        .set({
+          margin: 8,
+          filename: `cuadernillo_${studentName || "estudiante"}.pdf`,
+          image: { type: "jpeg" as const, quality: 0.95 },
+          html2canvas: { scale: 1, useCORS: true, logging: false },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        })
+        .from(ref.current)
+        .save()
+    } catch {
+      window.print()
+    }
+    setDownloading(false)
   }, [studentName])
 
   return (
