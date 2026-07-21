@@ -12,7 +12,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
           <img src="/logo.svg" alt="Logo" className="h-7 w-7" />
           <span className="text-sm font-semibold text-zinc-700 hover:text-blue-600 max-sm:hidden">
-            Aprendamos a Estudiar
+            Aprendamos a Estudiar, JULIO 2026
           </span>
         </Link>
         <div className="flex items-center gap-3">
@@ -21,7 +21,7 @@ export function Header() {
               {studentName}
             </span>
           )}
-          <span className="text-xs text-zinc-400">9° Grado — MINED 2026</span>
+          <span className="text-xs text-zinc-400">Cuadernillo 9° Grado</span>
         </div>
       </div>
     </header>

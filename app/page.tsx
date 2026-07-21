@@ -54,8 +54,8 @@ export default function Home() {
     return (
       <div className="mx-auto max-w-md py-12">
         <div className="mb-6 text-center">
-          <h1 className="text-xl font-bold text-zinc-900">Cuadernillo de Estudio</h1>
-          <p className="mt-1 text-sm text-zinc-500">9° Grado — MINED 2026</p>
+          <h1 className="text-xl font-bold text-zinc-900">Aprendamos a Estudiar, JULIO 2026</h1>
+          <p className="mt-1 text-sm text-zinc-500">Cuadernillo de estudio — 9° Grado</p>
         </div>
         <StudentSelector />
       </div>
@@ -65,9 +65,9 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-zinc-900">Cuadernillo de Estudio</h1>
+        <h1 className="text-2xl font-bold text-zinc-900">Aprendamos a Estudiar, JULIO 2026</h1>
         <p className="text-sm text-zinc-500">
-          Seleccioná un ítem para comenzar. Podés guardar tu progreso y continuar después.
+          Cuadernillo de estudio — 9° Grado. Seleccioná un ítem para comenzar.
         </p>
       </div>
 

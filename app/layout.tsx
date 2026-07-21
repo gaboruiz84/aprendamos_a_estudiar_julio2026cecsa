@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Aprendamos a Estudiar — MINED 2026",
-  description: "Cuadernillo de estudio para 9° grado — MINED 2026",
+  title: "Aprendamos a Estudiar, JULIO 2026",
+  description: "Aprendamos a Estudiar, JULIO 2026 — Cuadernillo de estudio para 9° grado",
   manifest: "/manifest.json",
   icons: {
     icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Aprendamos",
+    title: "Aprendamos a Estudiar, JULIO 2026",
   },
 }
 

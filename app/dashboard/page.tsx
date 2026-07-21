@@ -138,7 +138,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-xl font-bold text-zinc-900">Dashboard Docente</h1>
-        <p className="mt-1 text-sm text-zinc-500">Resumen de respuestas — MINED 2026</p>
+        <p className="mt-1 text-sm text-zinc-500">Aprendamos a Estudiar, JULIO 2026 — Resumen de respuestas</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

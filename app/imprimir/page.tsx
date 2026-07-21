@@ -87,9 +87,9 @@ export default function ImprimirPage() {
       <div ref={ref} className="space-y-8">
       <div className="border-b-2 border-zinc-800 pb-4 text-center">
         <h1 className="text-base font-bold uppercase tracking-tight">
-          Cuadernillo de Estudio
+          Aprendamos a Estudiar, JULIO 2026
         </h1>
-        <p className="mt-0.5 text-xs text-zinc-500">9° Grado — MINED 2026</p>
+        <p className="mt-0.5 text-xs text-zinc-500">Cuadernillo de estudio — 9° Grado</p>
         <div className="mt-3 space-y-0.5 text-xs">
           <p className="font-semibold">{SCHOOL_NAME}</p>
           <p>Código: {SCHOOL_CODE}</p>
