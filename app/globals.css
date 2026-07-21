@@ -50,6 +50,8 @@ body {
     font-size: 10pt;
     color: #000;
     background: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
   main {
     max-width: 100% !important;

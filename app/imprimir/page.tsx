@@ -104,8 +104,8 @@ export default function ImprimirPage() {
                       return (
                         <div key={key} className="flex items-center gap-1">
                           <span>{cfg.emoji}</span>
-                          <div className="h-2 w-10 overflow-hidden rounded-full bg-zinc-200">
-                            <div className={`h-full rounded-full ${cfg.color}`} style={{ width: `${pct}%` }} />
+                          <div className="h-2 w-10 overflow-hidden rounded-full bg-zinc-200" style={{ printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }}>
+                            <div className={`h-full rounded-full ${cfg.color}`} style={{ width: `${pct}%`, printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }} />
                           </div>
                           <span className="text-[10px] text-zinc-400">{stats.counts[key]}</span>
                         </div>
@@ -204,7 +204,7 @@ export default function ImprimirPage() {
           Guardar PDF
         </button>
         <p className="text-center text-[10px] text-zinc-400">
-          En Chrome: seleccioná "Guardar como PDF" y luego "Descargar".
+          En Chrome: seleccioná "Guardar como PDF" o "Google Drive" como destino.
         </p>
         <button
           onClick={() => window.history.back()}
@@ -239,10 +239,10 @@ function DifSummary({ counts, total }: { counts: Record<Difficulty, number>; tot
                 <span>{item.label}</span>
                 <span>{item.count} ({item.pct}%)</span>
               </div>
-              <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-100">
+              <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-100" style={{ printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }}>
                 <div
                   className={`h-full rounded-full ${item.color} transition-all`}
-                  style={{ width: `${item.pct}%` }}
+                  style={{ width: `${item.pct}%`, printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }}
                 />
               </div>
             </div>
