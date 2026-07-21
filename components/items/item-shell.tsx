@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useStore } from "@/store"
 import { Button } from "@/components/ui/button"
@@ -64,8 +65,10 @@ export function ItemShell({ config }: ItemShellProps) {
   }, [config, isPhaseComplete])
 
   const [currentPhase, setCurrentPhase] = useState(firstIncomplete)
+  const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [countdown, setCountdown] = useState(5)
   const [phaseErrors, setPhaseErrors] = useState<Record<number, boolean>>({})
 
   const isLastPhase = currentPhase === config.phases[config.phases.length - 1].phase
@@ -112,6 +115,12 @@ export function ItemShell({ config }: ItemShellProps) {
       setSubmitting(false)
     }
   }, [config.id, getItemAnswers, studentId, studentName, studentNie])
+
+  useEffect(() => {
+    if (!submitted) return
+    const t = setTimeout(() => router.push("/"), 2000)
+    return () => clearTimeout(t)
+  }, [submitted, router])
 
   if (submitted) {
     return (
