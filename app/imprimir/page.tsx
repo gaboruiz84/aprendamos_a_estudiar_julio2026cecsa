@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useRef, useState, useCallback } from "react"
 import { useStore } from "@/store"
 import { useStudent } from "@/components/student/student-provider"
 import { piruetaConfig } from "@/app/(items)/pirueta-patineta/config"
@@ -26,6 +26,8 @@ const DIFF_CONFIG: Record<Difficulty, { emoji: string; color: string; label: str
 }
 
 export default function ImprimirPage() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [downloading, setDownloading] = useState(false)
   const { studentName, studentNie } = useStudent()
   const answers = useStore((s) => s.answers)
 
@@ -63,8 +65,26 @@ export default function ImprimirPage() {
     return { counts, total }
   }, [itemStats])
 
+  const handleDownload = useCallback(async () => {
+    if (!ref.current) return
+    setDownloading(true)
+    const html2pdf = (await import("html2pdf.js")).default
+    html2pdf()
+      .set({
+        margin: 8,
+        filename: `cuadernillo_${studentName || "estudiante"}.pdf`,
+        image: { type: "jpeg" as const, quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      })
+      .from(ref.current)
+      .save()
+      .then(() => setDownloading(false))
+  }, [studentName])
+
   return (
     <div className="space-y-8 py-3">
+      <div ref={ref} className="space-y-8">
       <div className="border-b-2 border-zinc-800 pb-4 text-center">
         <h1 className="text-base font-bold uppercase tracking-tight">
           Cuadernillo de Estudio
@@ -195,13 +215,15 @@ export default function ImprimirPage() {
           </section>
         )
       })}
+      </div>
 
       <div className="no-print flex flex-col gap-3 border-t border-zinc-200 pt-5">
         <button
-          onClick={() => window.print()}
-          className="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white active:bg-blue-700"
+          onClick={handleDownload}
+          disabled={downloading}
+          className="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white active:bg-blue-700 disabled:opacity-60"
         >
-          Guardar PDF
+          {downloading ? "Generando PDF..." : "Guardar PDF"}
         </button>
         <button
           onClick={() => window.history.back()}
